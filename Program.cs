@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,11 +71,15 @@ namespace ExcelToSql
 
 
         static String dataBaseName, serverName;
+        static bool isDelta;
         static List<string> lsBatchFile = new List<string>();
         private static void createFile(string FileName,string FileExtension, string script)
         {
             // Create the file.
-            script = script + "\nGO\n\n";
+            if (FileExtension != ".bat")
+                script = script + "\nGO\n\n";
+            else
+                script = script + "\n";
             if (!File.Exists(outputPath + FileName + FileExtension))
             {
                 Directory.CreateDirectory(outputPath);
@@ -128,6 +132,9 @@ namespace ExcelToSql
         {
             string script;
             string tempbody = string.Empty;
+            string strDelta = string.Empty;
+           
+
             int maxLength = ColumnName.Max(x => x.Length);
             string formatColString = @"{0,-" + (maxLength + 5).ToString() + "}";
             maxLength = DataType.Max(x => x.Length);
@@ -169,16 +176,24 @@ namespace ExcelToSql
                 }
             }
 
-
-            script = script + "\n\n" + primaryKey + "\n\n";
+            if (isDelta)
+            {
+                script = script + "\n\n" + primaryKey + "\n\n";
+                script = string.Format("IF NOT EXISTS (select 1 from INFORMATION_SCHEMA.TABLES Where TABLE_NAME='{0}') \n BEGIN  \n {1} \n END",new string[] { TableName, script });
+                isDelta = false;
+            }
+            else
+            {
+                script = script + "\n\n" + primaryKey + "\n\n";
+            }
             createFile(TableName,".sql", script);
-            lsBatchFile.Add(string.Format(@"sqlcmd -S {0}\{1} -i C:\{2} -o C:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + ".sql" }));
+            lsBatchFile.Add(string.Format(@"sqlcmd -S {0} -d {1} -i F:\{2} -o F:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + ".sql" }));
             
 
             if (!string.IsNullOrEmpty(ForeignKey))
             {
                 createFile(TableName + "_FK", ".sql", "\n\n" + ForeignKey + "\n\nGO\n");
-                lsBatchFile.Add( string.Format(@"sqlcmd -S {0}\{1} -i C:\{2} -o C:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + "_FK" + ".sql" }));
+                lsBatchFile.Add( string.Format(@"sqlcmd -S {0} -d {1} -i F:\{2} -o F:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + "_FK" + ".sql" }));
                 
             }
 
@@ -227,7 +242,7 @@ namespace ExcelToSql
             string strpath = SourceFilepath.Split('.')[0].ToString();
             string strFileext = SourceFilepath.Split('.')[1].ToString();
             string conn = string.Empty;
-            if (SourceFilepath.Contains("xls"))
+            if (SourceFilepath.EndsWith("xls"))
                 conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + SourceFilepath + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
             else
                 conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SourceFilepath + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
@@ -252,6 +267,14 @@ namespace ExcelToSql
                 for (int i = 0; i < dataTable.Rows.Count ; ++i)
                     for (int j = 0; j < dataTable.Columns.Count ; ++j)
                     {
+                        if(i>2&& dataTable.Columns.Count>j+1 && dataTable.Rows[i-3][j+1].ToString().ToLower().Trim() == "apply delta")
+                        {
+                            if(dataTable.Rows[i - 3][j + 2].ToString().ToLower().Trim()=="true")
+                            {
+                                isDelta = true;
+                            }
+                        }
+
                         if (dataTable.Rows[i][j].ToString().ToLower().Trim() == "table name")
                         {
                             List<string> AddColumnList, AddDataTypeList, AddNotNullColumnList;
@@ -262,12 +285,11 @@ namespace ExcelToSql
                             commanColumnInfo(dataTable, i, j, AddColumnList, AddDataTypeList, AddNotNullColumnList);
                             commanServerInfo(dataTable, i, j, out dataBaseName, out serverName);
                             string TableName=  newTableCreation(dataTable, i, j, AddColumnList, AddDataTypeList, AddNotNullColumnList);
-                           
                         }
                         #region Modified Columns
                         if (dataTable.Rows[i][j].ToString().ToLower().Trim() == "alter table name")
                         {
-                            while (dataTable.Rows[i + 1][j].ToString().Trim() != string.Empty)
+                            while (dataTable.Rows.Count<i &&  dataTable.Rows[i + 1][j].ToString().Trim() != string.Empty)
                             {
                                 if (dataTable.Rows[i + 1][j - 1].ToString().ToLower().Trim() == "add column")
                                 {
@@ -342,8 +364,8 @@ namespace ExcelToSql
                         {
                             if (dataTable.Rows[row][column].ToString().ToLower().Trim() == lookupServerInstance.ToLower() && dataTable.Rows[row + 1][column].ToString().ToLower().Trim() == "servername")
                             {
-                                dataBaseName = dataTable.Rows[row + 1][column + 1].ToString();
-                                serverName = dataTable.Rows[row + 2][column + 1].ToString();
+                                serverName = dataTable.Rows[row + 1][column + 1].ToString();
+                                dataBaseName  = dataTable.Rows[row + 2][column + 1].ToString();
                                 return;
                             }
                         }
@@ -469,9 +491,10 @@ namespace ExcelToSql
             {
                 String SourceFilepath = string.Empty;
                 Console.WriteLine(".xls file path: ");
+
                 SourceFilepath = Console.ReadLine();
                 if (string.IsNullOrEmpty(SourceFilepath))
-                    SourceFilepath = @"C:\New folder\DatabaseTab.xml.xls";
+                    SourceFilepath = @"G:\New folder\EtoS.xlsx";
                 outputPath = Versioning();
                 //Script generated from text files
                 //  <--Scriptfromtxtfiles();--!>
