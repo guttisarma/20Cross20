@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,6 +73,7 @@ namespace ExcelToSql
         static String dataBaseName, serverName;
         static bool isDelta;
         static List<string> lsBatchFile = new List<string>();
+        static Dictionary<string, string> foriegnKeyInfo;
         private static void createFile(string FileName,string FileExtension, string script)
         {
             // Create the file.
@@ -172,7 +173,29 @@ namespace ExcelToSql
                         isPrimary = false;
                         continue;
                     }
-                    ForeignKey += "ALTER TABLE " + TableName + "\nADD CONSTRAINT FK_" + TableName + "_" + checkPID + " FOREIGN KEY ( " + checkPID + " ) REFERENCES " + checkPID.Substring(0, checkPID.Length - 3) + " ( " + checkPID + " );" + "\n\n";
+  
+                    if(isDelta)
+                    {
+                        //while adding to dictionary also toLoweris used
+                        string ForiegnStr;
+                        if (foriegnKeyInfo.ContainsKey(checkPID.ToLower()))
+                        {
+                            ForiegnStr = "ALTER TABLE " + TableName + "\nADD CONSTRAINT FK_" + TableName + "_" + checkPID + " FOREIGN KEY ( " + checkPID + " ) REFERENCES [" + foriegnKeyInfo[checkPID.ToLower()] + "] ( " + foriegnKeyInfo[checkPID.ToLower()] + "PID" + " );" + "\n\n";
+                        }
+                        ForiegnStr= "ALTER TABLE " + TableName + "\nADD CONSTRAINT FK_" + TableName + "_" + checkPID + " FOREIGN KEY ( " + checkPID + " ) REFERENCES [" + checkPID.Substring(0, checkPID.Length - 3) + "] ( " + checkPID + " );" + "\n\n";
+
+                        ForeignKey += string.Format("IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE TYPE_DESC='FOREIGN_KEY_CONSTRAINT' AND NAME='Fk_{0}')\nBEGIN \n\t {1} END \n\n\n",new string[] { TableName + "_" + checkPID, ForiegnStr });
+                    }
+                    else
+                    {
+                        //while adding to dictionary also toLoweris used
+                        if (foriegnKeyInfo.ContainsKey(checkPID.ToLower()))
+                        {
+                            ForeignKey += "ALTER TABLE " + TableName + "\nADD CONSTRAINT FK_" + TableName + "_" + checkPID + " FOREIGN KEY ( " + checkPID + " ) REFERENCES [" + foriegnKeyInfo[checkPID.ToLower()] + "] ( " + foriegnKeyInfo[checkPID.ToLower()] + "PID" + " );" + "\n\n";
+                        }
+                        ForeignKey += "ALTER TABLE " + TableName + "\nADD CONSTRAINT FK_" + TableName + "_" + checkPID + " FOREIGN KEY ( " + checkPID + " ) REFERENCES [" + checkPID.Substring(0, checkPID.Length - 3) + "] ( " + checkPID + " );" + "\n\n";
+
+                    }
                 }
             }
 
@@ -180,25 +203,46 @@ namespace ExcelToSql
             {
                 script = script + "\n\n" + primaryKey + "\n\n";
                 script = string.Format("IF NOT EXISTS (select 1 from INFORMATION_SCHEMA.TABLES Where TABLE_NAME='{0}') \n BEGIN  \n {1} \n END",new string[] { TableName, script });
-                isDelta = false;
+
+                //each column 
+
+                for (int j = 0; j < ColumnName.Count; ++j)
+                {
+                    for (int i = 0; i < DataType.Count; ++i)
+                        if (j == i)
+                        {
+                            tempbody = null; 
+                            if (i == 0 && j == 0)
+                                continue;
+                            else
+                            {
+                                bool IsNotNull = CheckIsNotNull(ColumnName[j], NotNullColumnList);
+                                if (IsNotNull)
+                                    tempbody = "\t\t" + "ALTER TABLE " +TableName+ "\n\t\t ADD " + String.Format(formatColString, ColumnName[j]) +"\t"+ String.Format(formatColString, DataType[i].ToUpper()) + " NOT NULL \n";
+                                else
+                                    tempbody = "\t\t" + "ALTER TABLE " + TableName + "\n\t\t ADD " + String.Format(formatColString, ColumnName[j]) + "\t" + String.Format(formatColString, DataType[i].ToUpper()) + " NULL \n";
+
+                                script += string.Format("\n\n IF NOT EXISTS ( SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='{0}' AND COLUMN_NAME='{3}' )\nBEGIN\n{1} \nEND", new string[] { TableName, tempbody , formatColString, ColumnName[j] });
+                            }
+                        }
+                }
             }
             else
             {
                 script = script + "\n\n" + primaryKey + "\n\n";
             }
             createFile(TableName,".sql", script);
-            lsBatchFile.Add(string.Format(@"sqlcmd -S {0} -d {1} -i F:\{2} -o F:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + ".sql" }));
+                isDelta = false;
+
+            lsBatchFile.Add(string.Format(@"sqlcmd -S {0} -d {1} -i ""{3}{2}"" -o ""{3}{2}_output.txt""", new string[] { serverName, dataBaseName, TableName + ".sql" , outputPath }));
             
 
             if (!string.IsNullOrEmpty(ForeignKey))
             {
                 createFile(TableName + "_FK", ".sql", "\n\n" + ForeignKey + "\n\nGO\n");
-                lsBatchFile.Add( string.Format(@"sqlcmd -S {0} -d {1} -i F:\{2} -o F:\EmpAdds.txt", new string[] { serverName, dataBaseName, TableName + "_FK" + ".sql" }));
+                lsBatchFile.Add( string.Format(@"sqlcmd -S {0} -d {1} -i ""{3}{2}"" -o ""{3}{2}_output.txt""", new string[] { serverName, dataBaseName, TableName + "_FK" + ".sql", outputPath }));
                 
             }
-
-
-
         }
 
         public static DataTable ReadExcel(string fileName, string fileExt, string sheetName)
@@ -281,7 +325,7 @@ namespace ExcelToSql
                             AddColumnList = new List<string>();
                             AddDataTypeList = new List<string>();
                             AddNotNullColumnList = new List<string>();
-                            
+                            foriegnKeyInfo = new Dictionary<string, string>();
                             commanColumnInfo(dataTable, i, j, AddColumnList, AddDataTypeList, AddNotNullColumnList);
                             commanServerInfo(dataTable, i, j, out dataBaseName, out serverName);
                             string TableName=  newTableCreation(dataTable, i, j, AddColumnList, AddDataTypeList, AddNotNullColumnList);
@@ -416,6 +460,7 @@ namespace ExcelToSql
                 NotNullColumnList.AddRange(AddNotNullColumnList);
                 extractTable(TableName, ColumnList, DataTypeList, NotNullColumnList);
             }
+            foriegnKeyInfo.Clear();
             return TableName;
         }
 
@@ -436,6 +481,18 @@ namespace ExcelToSql
                     break;
                 }
                 ColumnList.Add(column);
+
+                //Explicit Foriegn key table case
+                if(dataTable.Columns.Count>j+3 && !string.IsNullOrEmpty(dataTable.Rows[i + c][j + 3].ToString().Trim()))
+                {
+                    string foriegnkeyInfo = dataTable.Rows[i + c][j + 3].ToString().Trim();
+                    if (foriegnkeyInfo.Contains('/') || foriegnkeyInfo.Contains('\\'))
+                    {
+                        //we can break PID means Foriegn Key
+                    }
+                    //while Comparing to dictionary also toLoweris used
+                    foriegnKeyInfo.Add(dataTable.Rows[i + c][j].ToString().ToLower(), dataTable.Rows[i + c][j + 3].ToString());
+                }
             }
             for (int c = 2; c < dataTable.Columns.Count - 1; ++c)
             {
@@ -480,6 +537,8 @@ namespace ExcelToSql
                 if (columnValue.ToLower() == "true")
                     NotNullColumnList.Add(column);
             }
+            
+
         }
 
         #endregion
