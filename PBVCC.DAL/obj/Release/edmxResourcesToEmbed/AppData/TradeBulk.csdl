@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeBulkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressPID" />
+    </Key>
+    <Property Name="AddressPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Address3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PhonePID" Type="Int64" />
+    <Property Name="EmailPID" Type="Int64" />
+    <NavigationProperty Name="Email" Relationship="Self.FK_Address_Email" FromRole="Address" ToRole="Email" />
+    <NavigationProperty Name="Phone" Relationship="Self.FK_Address_Phone" FromRole="Address" ToRole="Phone" />
+    <NavigationProperty Name="UserDetailAddresses" Relationship="Self.FK_UserDetailAddress_AddressPID" FromRole="Address" ToRole="UserDetailAddress" />
+  </EntityType>
+  <EntityType Name="AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypePID" />
+    </Key>
+    <Property Name="AddressTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityPID" />
+    </Key>
+    <Property Name="CityPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryPID" />
+    </Key>
+    <Property Name="CountryPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailPid" />
+    </Key>
+    <Property Name="EmailPid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailTypePID" Type="Int64" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Email" FromRole="Email" ToRole="Address" />
+    <NavigationProperty Name="EmailType" Relationship="Self.FK_Email_EmailType" FromRole="Email" ToRole="EmailType" />
+  </EntityType>
+  <EntityType Name="EmailType">
+    <Key>
+      <PropertyRef Name="EmailTypePID" />
+    </Key>
+    <Property Name="EmailTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Emails" Relationship="Self.FK_Email_EmailType" FromRole="EmailType" ToRole="Email" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="Phonepid" />
+    </Key>
+    <Property Name="Phonepid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneTypePID" Type="Int64" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Phone" FromRole="Phone" ToRole="Address" />
+    <NavigationProperty Name="PhoneType" Relationship="Self.FK_Phone_PhoneType" FromRole="Phone" ToRole="PhoneType" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="PhoneTypePID" />
+    </Key>
+    <Property Name="PhoneTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Phones" Relationship="Self.FK_Phone_PhoneType" FromRole="PhoneType" ToRole="Phone" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_dbo_Roles_RoleId" FromRole="Roles" ToRole="UserRoles" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StatePID" />
+    </Key>
+    <Property Name="StatePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="UserdetailPID" />
+    </Key>
+    <Property Name="UserdetailPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="DateofBirth" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveReason" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserHierarchies" Relationship="TradeBulkModel.FK_UserHierarchy_ManagerUserDetailPID" FromRole="UserDetail" ToRole="UserHierarchy" />
+    <NavigationProperty Name="UserHierarchies1" Relationship="TradeBulkModel.FK_UserHierarchy_UserDetailPID" FromRole="UserDetail" ToRole="UserHierarchy" />
+    <Property Name="RejectReason" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserAddressPID" Type="Int64" />
+    <NavigationProperty Name="UserDetailAddress" Relationship="TradeBulkModel.FK_UserDetail_UserDetailAddressPID" FromRole="UserDetail" ToRole="UserDetailAddress" />
+    <NavigationProperty Name="UserAuctionInfoes" Relationship="TradeBulkModel.FK_UserAuctionInfo_ManagerUserDetailPID" FromRole="UserDetail" ToRole="UserAuctionInfo" />
+    <NavigationProperty Name="UserAuctionInfoes1" Relationship="TradeBulkModel.FK_UserAuctionInfo_UserDetailPID" FromRole="UserDetail" ToRole="UserAuctionInfo" />
+  </EntityType>
+  <EntityType Name="UserDetailAddress">
+    <Key>
+      <PropertyRef Name="UserDetailAddressPID" />
+    </Key>
+    <Property Name="UserDetailAddressPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetailPID" Type="Int64" />
+    <Property Name="AddressPID" Type="Int64" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_UserDetailAddress_AddressPID" FromRole="UserDetailAddress" ToRole="Address" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserDetailAddress_UserDetailPID" FromRole="UserDetailAddress" ToRole="UserDetail" />
+    <NavigationProperty Name="UserDetails" Relationship="TradeBulkModel.FK_UserDetail_UserDetailAddressPID" FromRole="UserDetailAddress" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="UserRolesPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_dbo_UserRoles_dbo_Roles_RoleId" FromRole="UserRoles" ToRole="Roles" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserRoles_dbo_Users_UserId" FromRole="UserRoles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_dbo_Users_UserId" FromRole="Users" ToRole="UserRoles" />
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypePID" />
+    </Key>
+    <Property Name="UserTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Address_Email">
+    <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailPid" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="EmailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Phone">
+    <End Role="Phone" Type="Self.Phone" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phone">
+        <PropertyRef Name="Phonepid" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="PhonePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetailAddress_AddressPID">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="UserDetailAddress" Type="Self.UserDetailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressPID" />
+      </Principal>
+      <Dependent Role="UserDetailAddress">
+        <PropertyRef Name="AddressPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_EmailType">
+    <End Role="EmailType" Type="Self.EmailType" Multiplicity="0..1" />
+    <End Role="Email" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmailType">
+        <PropertyRef Name="EmailTypePID" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EmailTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_PhoneType">
+    <End Role="PhoneType" Type="Self.PhoneType" Multiplicity="0..1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="PhoneTypePID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="PhoneTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetailAddress_UserDetailPID">
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+    <End Role="UserDetailAddress" Type="Self.UserDetailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserDetailAddress">
+        <PropertyRef Name="UserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TradeBulkEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="AddressTypes" EntityType="Self.AddressType" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Emails" EntityType="Self.Email" />
+    <EntitySet Name="EmailTypes" EntityType="Self.EmailType" />
+    <EntitySet Name="Phones" EntityType="Self.Phone" />
+    <EntitySet Name="PhoneTypes" EntityType="Self.PhoneType" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <EntitySet Name="UserDetailAddresses" EntityType="Self.UserDetailAddress" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_Address_Email" Association="Self.FK_Address_Email">
+      <End Role="Email" EntitySet="Emails" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Phone" Association="Self.FK_Address_Phone">
+      <End Role="Phone" EntitySet="Phones" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetailAddress_AddressPID" Association="Self.FK_UserDetailAddress_AddressPID">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="UserDetailAddress" EntitySet="UserDetailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_EmailType" Association="Self.FK_Email_EmailType">
+      <End Role="EmailType" EntitySet="EmailTypes" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_PhoneType" Association="Self.FK_Phone_PhoneType">
+      <End Role="PhoneType" EntitySet="PhoneTypes" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetailAddress_UserDetailPID" Association="Self.FK_UserDetailAddress_UserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserDetailAddress" EntitySet="UserDetailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="UserHierarchies" EntityType="TradeBulkModel.UserHierarchy" />
+    <AssociationSet Name="FK_UserHierarchy_ManagerUserDetailPID" Association="TradeBulkModel.FK_UserHierarchy_ManagerUserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserHierarchy" EntitySet="UserHierarchies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserHierarchy_UserDetailPID" Association="TradeBulkModel.FK_UserHierarchy_UserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserHierarchy" EntitySet="UserHierarchies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetail_UserDetailAddressPID" Association="TradeBulkModel.FK_UserDetail_UserDetailAddressPID">
+      <End Role="UserDetailAddress" EntitySet="UserDetailAddresses" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+    <EntitySet Name="Documents" EntityType="TradeBulkModel.Document" />
+    <EntitySet Name="DocumentTypes" EntityType="TradeBulkModel.DocumentType" />
+    <EntitySet Name="Products" EntityType="TradeBulkModel.Product" />
+    <EntitySet Name="ProductTypes" EntityType="TradeBulkModel.ProductType" />
+    <EntitySet Name="UserAuctionInfoes" EntityType="TradeBulkModel.UserAuctionInfo" />
+    <AssociationSet Name="FK_Document_DocumentTypePID" Association="TradeBulkModel.FK_Document_DocumentTypePID">
+      <End Role="DocumentType" EntitySet="DocumentTypes" />
+      <End Role="Document" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_DocumentPID" Association="TradeBulkModel.FK_Product_DocumentPID">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductTypePID" Association="TradeBulkModel.FK_Product_ProductTypePID">
+      <End Role="ProductType" EntitySet="ProductTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAuctionInfo_ProductPID" Association="TradeBulkModel.FK_UserAuctionInfo_ProductPID">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="UserAuctionInfo" EntitySet="UserAuctionInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAuctionInfo_ManagerUserDetailPID" Association="TradeBulkModel.FK_UserAuctionInfo_ManagerUserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserAuctionInfo" EntitySet="UserAuctionInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAuctionInfo_UserDetailPID" Association="TradeBulkModel.FK_UserAuctionInfo_UserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserAuctionInfo" EntitySet="UserAuctionInfoes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserHierarchy">
+    <Key>
+      <PropertyRef Name="UserHierarchyPID" />
+    </Key>
+    <Property Name="UserHierarchyPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetailPID" Type="Int64" />
+    <Property Name="ManagerUserDetailPID" Type="Int64" />
+    <NavigationProperty Name="UserDetail" Relationship="TradeBulkModel.FK_UserHierarchy_ManagerUserDetailPID" FromRole="UserHierarchy" ToRole="UserDetail" />
+    <NavigationProperty Name="UserDetail1" Relationship="TradeBulkModel.FK_UserHierarchy_UserDetailPID" FromRole="UserHierarchy" ToRole="UserDetail" />
+  </EntityType>
+  <Association Name="FK_UserHierarchy_ManagerUserDetailPID">
+    <End Type="TradeBulkModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserHierarchy" Role="UserHierarchy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserHierarchy">
+        <PropertyRef Name="ManagerUserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserHierarchy_UserDetailPID">
+    <End Type="TradeBulkModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserHierarchy" Role="UserHierarchy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserHierarchy">
+        <PropertyRef Name="UserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetail_UserDetailAddressPID">
+    <End Type="TradeBulkModel.UserDetailAddress" Role="UserDetailAddress" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetailAddress">
+        <PropertyRef Name="UserDetailAddressPID" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="UserAddressPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="DocumentPID" />
+    </Key>
+    <Property Name="DocumentPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServerPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentTypePID" Type="Int64" />
+    <NavigationProperty Name="DocumentType" Relationship="TradeBulkModel.FK_Document_DocumentTypePID" FromRole="Document" ToRole="DocumentType" />
+    <NavigationProperty Name="Products" Relationship="TradeBulkModel.FK_Product_DocumentPID" FromRole="Document" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="DocumentType">
+    <Key>
+      <PropertyRef Name="DocumentTypePID" />
+    </Key>
+    <Property Name="DocumentTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Documents" Relationship="TradeBulkModel.FK_Document_DocumentTypePID" FromRole="DocumentType" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductPID" />
+    </Key>
+    <Property Name="ProductPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductTypePID" Type="Int64" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="RatingPID" Type="Int64" />
+    <Property Name="Quanity" Type="Int32" Nullable="false" />
+    <Property Name="DocumentPID" Type="Int64" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Document" Relationship="TradeBulkModel.FK_Product_DocumentPID" FromRole="Product" ToRole="Document" />
+    <NavigationProperty Name="ProductType" Relationship="TradeBulkModel.FK_Product_ProductTypePID" FromRole="Product" ToRole="ProductType" />
+    <NavigationProperty Name="UserAuctionInfoes" Relationship="TradeBulkModel.FK_UserAuctionInfo_ProductPID" FromRole="Product" ToRole="UserAuctionInfo" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ProductTypePID" />
+    </Key>
+    <Property Name="ProductTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="TradeBulkModel.FK_Product_ProductTypePID" FromRole="ProductType" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="UserAuctionInfo">
+    <Key>
+      <PropertyRef Name="UserAuctionInfoPID" />
+    </Key>
+    <Property Name="UserAuctionInfoPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetailPID" Type="Int64" />
+    <Property Name="ManagerUserDetailPID" Type="Int64" />
+    <Property Name="ProductPID" Type="Int64" />
+    <Property Name="AuctionAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Timestamp" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="TradeBulkModel.FK_UserAuctionInfo_ProductPID" FromRole="UserAuctionInfo" ToRole="Product" />
+    <NavigationProperty Name="UserDetail" Relationship="TradeBulkModel.FK_UserAuctionInfo_ManagerUserDetailPID" FromRole="UserAuctionInfo" ToRole="UserDetail" />
+    <NavigationProperty Name="UserDetail1" Relationship="TradeBulkModel.FK_UserAuctionInfo_UserDetailPID" FromRole="UserAuctionInfo" ToRole="UserDetail" />
+  </EntityType>
+  <Association Name="FK_Document_DocumentTypePID">
+    <End Type="TradeBulkModel.DocumentType" Role="DocumentType" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.Document" Role="Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentType">
+        <PropertyRef Name="DocumentTypePID" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="DocumentTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_DocumentPID">
+    <End Type="TradeBulkModel.Document" Role="Document" Multiplicity="1" />
+    <End Type="TradeBulkModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="DocumentPID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="DocumentPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductTypePID">
+    <End Type="TradeBulkModel.ProductType" Role="ProductType" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="ProductTypePID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAuctionInfo_ProductPID">
+    <End Type="TradeBulkModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserAuctionInfo" Role="UserAuctionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductPID" />
+      </Principal>
+      <Dependent Role="UserAuctionInfo">
+        <PropertyRef Name="ProductPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAuctionInfo_ManagerUserDetailPID">
+    <End Type="TradeBulkModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserAuctionInfo" Role="UserAuctionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserAuctionInfo">
+        <PropertyRef Name="ManagerUserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAuctionInfo_UserDetailPID">
+    <End Type="TradeBulkModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="TradeBulkModel.UserAuctionInfo" Role="UserAuctionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserAuctionInfo">
+        <PropertyRef Name="UserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

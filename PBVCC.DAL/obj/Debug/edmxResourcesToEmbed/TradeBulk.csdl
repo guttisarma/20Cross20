@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeBulkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressPID" />
+    </Key>
+    <Property Name="AddressPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Address3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PhonePID" Type="Int64" />
+    <Property Name="EmailPID" Type="Int64" />
+    <NavigationProperty Name="Email" Relationship="Self.FK_Address_Email" FromRole="Address" ToRole="Email" />
+    <NavigationProperty Name="Phone" Relationship="Self.FK_Address_Phone" FromRole="Address" ToRole="Phone" />
+    <NavigationProperty Name="UserDetailAddresses" Relationship="Self.FK_UserDetailAddress_AddressPID" FromRole="Address" ToRole="UserDetailAddress" />
+  </EntityType>
+  <EntityType Name="AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypePID" />
+    </Key>
+    <Property Name="AddressTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityPID" />
+    </Key>
+    <Property Name="CityPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryPID" />
+    </Key>
+    <Property Name="CountryPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailPid" />
+    </Key>
+    <Property Name="EmailPid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailTypePID" Type="Int64" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Email" FromRole="Email" ToRole="Address" />
+    <NavigationProperty Name="EmailType" Relationship="Self.FK_Email_EmailType" FromRole="Email" ToRole="EmailType" />
+  </EntityType>
+  <EntityType Name="EmailType">
+    <Key>
+      <PropertyRef Name="EmailTypePID" />
+    </Key>
+    <Property Name="EmailTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Emails" Relationship="Self.FK_Email_EmailType" FromRole="EmailType" ToRole="Email" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="Phonepid" />
+    </Key>
+    <Property Name="Phonepid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneTypePID" Type="Int64" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_Phone" FromRole="Phone" ToRole="Address" />
+    <NavigationProperty Name="PhoneType" Relationship="Self.FK_Phone_PhoneType" FromRole="Phone" ToRole="PhoneType" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="PhoneTypePID" />
+    </Key>
+    <Property Name="PhoneTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Phones" Relationship="Self.FK_Phone_PhoneType" FromRole="PhoneType" ToRole="Phone" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StatePID" />
+    </Key>
+    <Property Name="StatePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="UserdetailPID" />
+    </Key>
+    <Property Name="UserdetailPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="DateofBirth" Type="DateTime" Precision="3" />
+    <Property Name="UserAddressPID" Type="Int64" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveReason" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserDetailAddresses" Relationship="Self.FK_UserDetailAddress_UserDetailPID" FromRole="UserDetail" ToRole="UserDetailAddress" />
+  </EntityType>
+  <EntityType Name="UserDetailAddress">
+    <Key>
+      <PropertyRef Name="UserDetailAddressPID" />
+    </Key>
+    <Property Name="UserDetailAddressPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserDetailPID" Type="Int64" />
+    <Property Name="AddressPID" Type="Int64" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_UserDetailAddress_AddressPID" FromRole="UserDetailAddress" ToRole="Address" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserDetailAddress_UserDetailPID" FromRole="UserDetailAddress" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypePID" />
+    </Key>
+    <Property Name="UserTypePID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Address_Email">
+    <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailPid" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="EmailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Phone">
+    <End Role="Phone" Type="Self.Phone" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phone">
+        <PropertyRef Name="Phonepid" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="PhonePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetailAddress_AddressPID">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="UserDetailAddress" Type="Self.UserDetailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressPID" />
+      </Principal>
+      <Dependent Role="UserDetailAddress">
+        <PropertyRef Name="AddressPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_EmailType">
+    <End Role="EmailType" Type="Self.EmailType" Multiplicity="0..1" />
+    <End Role="Email" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmailType">
+        <PropertyRef Name="EmailTypePID" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EmailTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_PhoneType">
+    <End Role="PhoneType" Type="Self.PhoneType" Multiplicity="0..1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="PhoneTypePID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="PhoneTypePID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetailAddress_UserDetailPID">
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+    <End Role="UserDetailAddress" Type="Self.UserDetailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserdetailPID" />
+      </Principal>
+      <Dependent Role="UserDetailAddress">
+        <PropertyRef Name="UserDetailPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TradeBulkEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="AddressTypes" EntityType="Self.AddressType" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Emails" EntityType="Self.Email" />
+    <EntitySet Name="EmailTypes" EntityType="Self.EmailType" />
+    <EntitySet Name="Phones" EntityType="Self.Phone" />
+    <EntitySet Name="PhoneTypes" EntityType="Self.PhoneType" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <EntitySet Name="UserDetailAddresses" EntityType="Self.UserDetailAddress" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_Address_Email" Association="Self.FK_Address_Email">
+      <End Role="Email" EntitySet="Emails" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Phone" Association="Self.FK_Address_Phone">
+      <End Role="Phone" EntitySet="Phones" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetailAddress_AddressPID" Association="Self.FK_UserDetailAddress_AddressPID">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="UserDetailAddress" EntitySet="UserDetailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_EmailType" Association="Self.FK_Email_EmailType">
+      <End Role="EmailType" EntitySet="EmailTypes" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_PhoneType" Association="Self.FK_Phone_PhoneType">
+      <End Role="PhoneType" EntitySet="PhoneTypes" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetailAddress_UserDetailPID" Association="Self.FK_UserDetailAddress_UserDetailPID">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserDetailAddress" EntitySet="UserDetailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

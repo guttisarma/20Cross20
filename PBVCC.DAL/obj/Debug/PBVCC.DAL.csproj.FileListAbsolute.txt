@@ -1,0 +1,10 @@
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\PBVCC.DAL.dll.config
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\PBVCC.DAL.dll
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\PBVCC.DAL.pdb
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Debug\PBVCC.DAL.dll
+C:\Users\Jagadeesh\Documents\Visual Studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Debug\PBVCC.DAL.pdb
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Debug\PBVCC.DAL.csprojResolveAssemblyReference.cache

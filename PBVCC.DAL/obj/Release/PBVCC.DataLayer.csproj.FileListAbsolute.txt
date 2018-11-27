@@ -1,0 +1,10 @@
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\PBVCC.DAL.dll.config
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\PBVCC.DAL.dll
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\PBVCC.DAL.pdb
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\EntityFramework.dll
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\EntityFramework.xml
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Release\PBVCC.DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Release\PBVCC.DAL.dll
+C:\Users\Jagadeesh\documents\visual studio 2017\Projects\SqlScriptGeneration\PBVCC.DAL\obj\Release\PBVCC.DAL.pdb

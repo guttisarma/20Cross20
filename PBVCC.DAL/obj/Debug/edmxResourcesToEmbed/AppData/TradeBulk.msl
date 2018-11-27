@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TradeBulkModelStoreContainer" CdmEntityContainer="TradeBulkEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="TradeBulkModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="EmailPID" ColumnName="EmailPID" />
+          <ScalarProperty Name="PhonePID" ColumnName="PhonePID" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="AddressPID" ColumnName="AddressPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.AddressType">
+        <MappingFragment StoreEntitySet="AddressType">
+          <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AddressTypePID" ColumnName="AddressTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="TradeBulkModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CityPID" ColumnName="CityPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="TradeBulkModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryPID" ColumnName="CountryPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="TradeBulkModel.Document">
+        <MappingFragment StoreEntitySet="Document">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="DocumentTypePID" ColumnName="DocumentTypePID" />
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="ServerPath" ColumnName="ServerPath" />
+          <ScalarProperty Name="DocumentPID" ColumnName="DocumentPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.DocumentType">
+        <MappingFragment StoreEntitySet="DocumentType">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="DocumentTypePID" ColumnName="DocumentTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="TradeBulkModel.Email">
+        <MappingFragment StoreEntitySet="Email">
+          <ScalarProperty Name="EmailTypePID" ColumnName="EmailTypePID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EmailPid" ColumnName="EmailPid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.EmailType">
+        <MappingFragment StoreEntitySet="EmailType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmailTypePID" ColumnName="EmailTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes">
+      <EntityTypeMapping TypeName="TradeBulkModel.Note">
+        <MappingFragment StoreEntitySet="Note">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="NotePID" ColumnName="NotePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="TradeBulkModel.Phone">
+        <MappingFragment StoreEntitySet="Phone">
+          <ScalarProperty Name="PhoneTypePID" ColumnName="PhoneTypePID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Phonepid" ColumnName="Phonepid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.PhoneType">
+        <MappingFragment StoreEntitySet="PhoneType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneTypePID" ColumnName="PhoneTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="TradeBulkModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="salesTypePid" ColumnName="salesTypePid" />
+          <ScalarProperty Name="ProductState" ColumnName="ProductState" />
+          <ScalarProperty Name="NotePid" ColumnName="NotePid" />
+          <ScalarProperty Name="assignedOwner" ColumnName="assignedOwner" />
+          <ScalarProperty Name="ispublic" ColumnName="ispublic" />
+          <ScalarProperty Name="EachPiecePrice" ColumnName="EachPiecePrice" />
+          <ScalarProperty Name="OwnerPID" ColumnName="OwnerPID" />
+          <ScalarProperty Name="AuctionDate" ColumnName="AuctionDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="DocumentPID" ColumnName="DocumentPID" />
+          <ScalarProperty Name="Quanity" ColumnName="Quanity" />
+          <ScalarProperty Name="RatingPID" ColumnName="RatingPID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ProductTypePID" ColumnName="ProductTypePID" />
+          <ScalarProperty Name="ProductPID" ColumnName="ProductPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductStates">
+      <EntityTypeMapping TypeName="TradeBulkModel.ProductState">
+        <MappingFragment StoreEntitySet="ProductState">
+          <ScalarProperty Name="ProductTypePID" ColumnName="ProductTypePID" />
+          <ScalarProperty Name="UserTypePId" ColumnName="UserTypePId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProductStatePid" ColumnName="ProductStatePid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductType">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ProductTypePID" ColumnName="ProductTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="TradeBulkModel.Rating">
+        <MappingFragment StoreEntitySet="Rating">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Numberofstars" ColumnName="Numberofstars" />
+          <ScalarProperty Name="RatingPid" ColumnName="RatingPid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="TradeBulkModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="saleTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.saleType">
+        <MappingFragment StoreEntitySet="saleType">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="saleTypePID" ColumnName="saleTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="TradeBulkModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StatePID" ColumnName="StatePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAuctionInfoes">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserAuctionInfo">
+        <MappingFragment StoreEntitySet="UserAuctionInfo">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="AuctionAmount" ColumnName="AuctionAmount" />
+          <ScalarProperty Name="ProductPID" ColumnName="ProductPID" />
+          <ScalarProperty Name="ManagerUserDetailPID" ColumnName="ManagerUserDetailPID" />
+          <ScalarProperty Name="UserDetailPID" ColumnName="UserDetailPID" />
+          <ScalarProperty Name="UserAuctionInfoPID" ColumnName="UserAuctionInfoPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetail">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="SecretCode" ColumnName="SecretCode" />
+          <ScalarProperty Name="NeedBroker" ColumnName="NeedBroker" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="UserTypePID" ColumnName="UserTypePID" />
+          <ScalarProperty Name="UserDetailAddressPID" ColumnName="UserDetailAddressPID" />
+          <ScalarProperty Name="ManagerPID" ColumnName="ManagerPID" />
+          <ScalarProperty Name="UserPID" ColumnName="UserPID" />
+          <ScalarProperty Name="UserAddressPID" ColumnName="UserAddressPID" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+          <ScalarProperty Name="ApproveReason" ColumnName="ApproveReason" />
+          <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserdetailPID" ColumnName="UserdetailPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDetailAddresses">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserDetailAddress">
+        <MappingFragment StoreEntitySet="UserDetailAddress">
+          <ScalarProperty Name="AddressPID" ColumnName="AddressPID" />
+          <ScalarProperty Name="UserDetailPID" ColumnName="UserDetailPID" />
+          <ScalarProperty Name="UserDetailAddressPID" ColumnName="UserDetailAddressPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserHierarchies">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserHierarchy">
+        <MappingFragment StoreEntitySet="UserHierarchy">
+          <ScalarProperty Name="ManagerUserDetailPID" ColumnName="ManagerUserDetailPID" />
+          <ScalarProperty Name="UserDetailPID" ColumnName="UserDetailPID" />
+          <ScalarProperty Name="UserHierarchyPID" ColumnName="UserHierarchyPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRolesPID" ColumnName="UserRolesPID" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TradeBulkModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTransacs">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserTransac">
+        <MappingFragment StoreEntitySet="UserTransac">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UserTransacTypePid" ColumnName="UserTransacTypePid" />
+          <ScalarProperty Name="UserTransacStatePid" ColumnName="UserTransacStatePid" />
+          <ScalarProperty Name="UserTransacDate" ColumnName="UserTransacDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ToUserPid" ColumnName="ToUserPid" />
+          <ScalarProperty Name="FromUserPid" ColumnName="FromUserPid" />
+          <ScalarProperty Name="UserTransacPid" ColumnName="UserTransacPid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTransacBrokers">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserTransacBroker">
+        <MappingFragment StoreEntitySet="UserTransacBroker">
+          <ScalarProperty Name="UpdatedUserPID" ColumnName="UpdatedUserPID" />
+          <ScalarProperty Name="CreatedUserPID" ColumnName="CreatedUserPID" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsRevertedTransction" ColumnName="IsRevertedTransction" />
+          <ScalarProperty Name="SalerPID" ColumnName="SalerPID" />
+          <ScalarProperty Name="buyerPid" ColumnName="buyerPid" />
+          <ScalarProperty Name="UserTransacPid" ColumnName="UserTransacPid" />
+          <ScalarProperty Name="UserTransacBrokerPID" ColumnName="UserTransacBrokerPID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTransacStates">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserTransacState">
+        <MappingFragment StoreEntitySet="UserTransacState">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserTransacStatePID" ColumnName="UserTransacStatePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTransacTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserTransacType">
+        <MappingFragment StoreEntitySet="UserTransacType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserTransacTypePID" ColumnName="UserTransacTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="TradeBulkModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserTypePID" ColumnName="UserTypePID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DropDownOnEntities">
+      <EntityTypeMapping TypeName="TradeBulkModel.DropDownOnEntity">
+        <MappingFragment StoreEntitySet="DropDownOnEntity">
+          <ScalarProperty Name="ColumnType" ColumnName="ColumnType" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+          <ScalarProperty Name="DropdownEntityPid" ColumnName="DropdownEntityPid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
