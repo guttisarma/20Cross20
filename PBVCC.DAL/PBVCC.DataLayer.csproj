@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{77A3758F-EECA-4622-AF1D-E2331A42AB31}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PBVCC.DAL</RootNamespace>
+    <AssemblyName>PBVCC.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\PBVCC\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\PBVCC\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppData\Address.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\AddressType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\City.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Country.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Document.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\DocumentType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\DropDownOnEntity.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Email.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\EmailType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Note.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Phone.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\PhoneType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Product.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\ProductState.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\ProductType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Rating.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Role.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\saleType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Security.cs" />
+    <Compile Include="AppData\State.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\TradeBulk.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeBulk.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\TradeBulk.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\TradeBulk.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeBulk.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\User.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserAuctionInfo.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserDetail.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserDetailAddress.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserHierarchy.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserRole.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserTransac.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserTransacBroker.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserTransacState.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserTransacType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\UserType.cs">
+      <DependentUpon>TradeBulk.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="AppData\TradeBulk.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TradeBulk.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AppData\TradeBulk.edmx.diagram">
+      <DependentUpon>TradeBulk.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppData\TradeBulk.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TradeBulk.edmx</DependentUpon>
+      <LastGenOutput>TradeBulk.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AppData\TradeBulk.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TradeBulk.edmx</DependentUpon>
+      <LastGenOutput>TradeBulk.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
